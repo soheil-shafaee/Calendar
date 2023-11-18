@@ -1,5 +1,6 @@
-from PyQt5.QtWidgets import QMainWindow, QApplication
+from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton, QCalendarWidget, QLabel, QLineEdit, QTextEdit
 from PyQt5 import uic
+from PyQt5.QtGui import QPixmap, QIcon
 import sys
 
 
@@ -9,6 +10,15 @@ class UI(QMainWindow):
 
         # Load The UI File
         uic.loadUi("calendar.ui", self)
+
+        # Define Our Widgets
+        self.plusButton = self.findChild(QPushButton, "plusButton")
+        self.calendar = self.findChild(QCalendarWidget, "calendarWidget")
+        self.toDo = self.findChild(QLabel, "textDoLabel")
+
+        # Change Icon And Image Icon
+        self.setWindowIcon(QIcon("icon/calendar.png"))
+        self.plusButton.setIcon(QIcon("icon/plus.png"))
 
         # Show The App
         self.show()
