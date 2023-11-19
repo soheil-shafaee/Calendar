@@ -25,6 +25,8 @@ class AddMeeting(QMainWindow):
 
 
 # Initialize The App
-app = QApplication(sys.argv)
-UIWindow = AddMeeting()
-app.exec_()
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    second_window = AddMeeting()
+    second_window.show()
+    app.exec_()
