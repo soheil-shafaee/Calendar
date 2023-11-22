@@ -5,7 +5,7 @@ import sys
 
 
 class AddMeeting(QMainWindow):
-    def __init__(self):
+    def __init__(self, date):
         super(AddMeeting, self).__init__()
 
         # Load The UI File
@@ -20,6 +20,10 @@ class AddMeeting(QMainWindow):
         # Change The Icon Of Window
         self.setWindowIcon(QIcon("icon/calendar.png"))
 
+        # The Selected Date
+        self.date = date
+        self.dateLabel.setText(self.date)
+
         # Show The App
         self.show()
 
@@ -27,6 +31,6 @@ class AddMeeting(QMainWindow):
 # Initialize The App
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    second_window = AddMeeting()
+    second_window = AddMeeting("some date")
     second_window.show()
     app.exec_()
