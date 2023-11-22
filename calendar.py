@@ -1,6 +1,7 @@
 from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton, QCalendarWidget, QLabel, QLineEdit, QTextEdit
-from PyQt5 import uic
+from PyQt5 import uic, QtCore
 from PyQt5.QtGui import QIcon
+from persiantools.jdatetime import JalaliDate
 import sys
 
 from add_meeting import AddMeeting
@@ -16,11 +17,14 @@ class UI(QMainWindow):
         # Define Our Widgets
         self.plusButton = self.findChild(QPushButton, "plusButton")
         self.calendar = self.findChild(QCalendarWidget, "calendarWidget")
-        self.toDo = self.findChild(QLabel, "textDoLabel")
+        self.nameToDo = self.findChild(QLabel, "nameMeetingLabel")
+        self.TextToDo = self.findChild(QLabel, "textMeetingLabel")
+
+        # # Make Gregorian calendar To Jalali Calendar(Remember That)
+        # self.calendar.setLocale(QtCore.QLocale.Persian)
 
         # Click The Button
         self.plusButton.clicked.connect(self.usePlus)
-        self.calendar.selectionChanged.connect(self.usePlus)
 
         # Change Icon And Image Icon
         self.setWindowIcon(QIcon("icon/calendar.png"))
@@ -36,9 +40,9 @@ class UI(QMainWindow):
 
     # Define Function To Use Second Window For Add Meeting
     def usePlus(self):
-        self.window = AddMeeting()
-        data = self.calendar.selectedDate()
-        self.window.dateLabel.setText(str(data.selected.toString()))
+        self.window = AddMeeting(self.date)
+        date_selected = self.calendar.selectedDate()
+        self.date = str(date_selected.toString())
 
 
 # Initialize The App
