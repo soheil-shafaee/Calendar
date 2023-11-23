@@ -22,20 +22,29 @@ class UI(QMainWindow):
         self.saveButton = self.findChild(QPushButton, "saveButton")
 
         # Clickable Our Needed Widgets
-        self.calendar.selected.connect(self.meetingCheck)
+        self.calendar.selectionChanged.connect(self.meetingCheck)
         self.saveButton.clicked.connect(self.saveMeeting)
+
+        # Define Variable For Selected Date
+        self.date = ""
 
         # Show The App
         self.show()
 
     # Define Function For Checking Meeting for  Selected Date
     def meetingCheck(self):
-        pass
+        selectedDate = self.calendar.selectedDate()
+        self.date = str(selectedDate.toString())
+        try:
+            with open(f"{self.date}.txt", "r") as file:
+                file_content = file.read()
+                print(file_content)
+        except FileNotFoundError:
+            self.textMeeting.setText("No Meeting Attached")
 
     # Define Function For Save The Meeting
     def saveMeeting(self):
         pass
-
 
 # Initialize The App
 app = QApplication(sys.argv)
