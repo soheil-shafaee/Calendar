@@ -5,9 +5,11 @@ This project is a simple calendar application built with PyQt5, allowing users t
 
 ## Features
 
-•	Persian calendar support
-•	Add and save meetings
-•	Intuitive user interface
+•	Persian calendar support.
+
+•	Add and save meetings.
+
+•	Intuitive user interface.
 
 ## Getting Started
 
@@ -22,7 +24,7 @@ This project is a simple calendar application built with PyQt5, allowing users t
     pip install -r requirements.txt
     ```
 
-3. **Run the Password Generator:**
+3. **Run the Calendar:**
     ```bash
     python calendar.py
     ```
