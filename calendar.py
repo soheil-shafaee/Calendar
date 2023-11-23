@@ -21,8 +21,20 @@ class UI(QMainWindow):
         self.textMeeting = self.findChild(QTextEdit, "meetingText")
         self.saveButton = self.findChild(QPushButton, "saveButton")
 
+        # Clickable Our Needed Widgets
+        self.calendar.selected.connect(self.meetingCheck)
+        self.saveButton.clicked.connect(self.saveMeeting)
+
         # Show The App
         self.show()
+
+    # Define Function For Checking Meeting for  Selected Date
+    def meetingCheck(self):
+        pass
+
+    # Define Function For Save The Meeting
+    def saveMeeting(self):
+        pass
 
 
 # Initialize The App
