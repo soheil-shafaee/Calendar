@@ -20,6 +20,7 @@ class UI(QMainWindow):
         self.calendar = self.findChild(QCalendarWidget, "calendarWidget")
         self.textMeeting = self.findChild(QTextEdit, "meetingText")
         self.saveButton = self.findChild(QPushButton, "saveButton")
+        self.jalaliDate = self.findChild(QLabel, "jalaiDate")
 
         # Clickable Our Needed Widgets
         self.calendar.selectionChanged.connect(self.meetingCheck)
@@ -38,19 +39,26 @@ class UI(QMainWindow):
         try:
             with open(f"{self.date}.txt", "r") as file:
                 file_content = file.read()
-                print(file_content)
                 self.textMeeting.setText(file_content)
         except FileNotFoundError:
             self.textMeeting.setText("No Meeting Attached")
 
+        # Convert Gregorian to Jalali
+        selectedDateForJalali = selectedDate.toPyDate()
+        jalaliDate = JalaliDate.to_jalali(selectedDateForJalali.year,
+                                          selectedDateForJalali.month,
+                                          selectedDateForJalali.day
+                                          )
+        self.jalaliDate.setText(jalaliDate.strftime("%Y/%m/%d"))
+
     # Define Function For Save The Meeting
     def saveMeeting(self):
         try:
-            with open(f"{self.date}.txt", "w") as file:
-                if str(self.textMeeting.toPlainText()) == "No Meeting Attached" or str(
-                        self.textMeeting.toPlainText()) == "":
-                    self.warningMessage()
-                else:
+            if str(self.textMeeting.toPlainText()) == "No Meeting Attached"\
+                    or str(self.textMeeting.toPlainText()) == "":
+                self.warningMessage()
+            else:
+                with open(f"{self.date}.txt", "w") as file:
                     file.write(self.textMeeting.toPlainText())
 
         except Exception as e:
