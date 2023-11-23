@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton, QCalendarWidget, QLabel, QTextEdit
+from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton, QCalendarWidget, QLabel, QTextEdit, QMessageBox
 from PyQt5 import uic
 from PyQt5.QtGui import QIcon
 from persiantools.jdatetime import JalaliDate
@@ -39,12 +39,31 @@ class UI(QMainWindow):
             with open(f"{self.date}.txt", "r") as file:
                 file_content = file.read()
                 print(file_content)
+                self.textMeeting.setText(file_content)
         except FileNotFoundError:
             self.textMeeting.setText("No Meeting Attached")
 
     # Define Function For Save The Meeting
     def saveMeeting(self):
-        pass
+        try:
+            with open(f"{self.date}.txt", "w") as file:
+                if str(self.textMeeting.toPlainText()) == "No Meeting Attached" or str(
+                        self.textMeeting.toPlainText()) == "":
+                    self.warningMessage()
+                else:
+                    file.write(self.textMeeting.toPlainText())
+
+        except Exception as e:
+            print(f"The Error is: {e}")
+
+    # Define Function for Warning Message
+    def warningMessage(self):
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Warning)
+        msg.setText("Don't empty The Day")
+        msg.setWindowTitle("Warning")
+        msg.exec_()
+
 
 # Initialize The App
 app = QApplication(sys.argv)
