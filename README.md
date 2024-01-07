@@ -15,7 +15,7 @@ This project is a simple calendar application built with PyQt5, allowing users t
 
 1. **Clone the repository:**
     ```bash
-    git clone https://github.com/your-username/calendar.git
+    git clone (https://github.com/soheil-shafaee/Calendar.git)
     cd calendar
     ```
 
@@ -33,5 +33,12 @@ This project is a simple calendar application built with PyQt5, allowing users t
 
 - Select Your Meeting date
 - Save into TXT File.
+
+## Video of Use
+
+
+https://github.com/soheil-shafaee/Calendar/assets/111058416/6bca5460-64f1-4739-bd9c-e7892f3ef294
+
+
 
 
